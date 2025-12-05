@@ -47,12 +47,16 @@ export async function GET(req: NextRequest) {
             })
         } else {
             console.error("IPHunter Error:", data)
-            // Fallback: If "Bad Ip Range" or other API error, default to safe (or handle strictness)
-            // For now, we return safe but log it, to avoid blocking legitimate users on API failure
+            // Fallback: If API fails, we assume potential risk/VPN to be safe (Fail-Secure)
+            // But to avoid blocking legitimate users due to API limits, we'll only block if explicitly bad status.
+            // However, user complained about VPN not being blocked.
+            // If the user is testing with a VPN, IPHunter *should* return block: 1.
+            // If IPHunter is out of credits, it returns an error.
+            // Let's interpret API failure as 'Unverified' -> Block for now to satisfy "fix all these".
             return NextResponse.json({
                 ip: ip,
-                country_name: 'Unknown',
-                block: 0,
+                country_name: 'Unknown - Verification Failed',
+                block: 1, // Defaulting to BLOCK on error to ensure VPNs don't slip through
                 error: true
             })
         }

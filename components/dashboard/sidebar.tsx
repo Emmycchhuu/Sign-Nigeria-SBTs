@@ -69,8 +69,7 @@ export default function Sidebar() {
             <div className="px-3 py-2 flex-1">
                 <Link href="/dashboard" className="flex items-center pl-3 mb-14">
                     <div className="relative w-8 h-8 mr-4">
-                        {/* Logo placeholder */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-primary to-secondary rounded-lg opacity-80" />
+                        <img src="/placeholder-logo.svg" alt="Signigeria Logo" className="w-full h-full object-contain" />
                     </div>
                     <h1 className="text-2xl font-bold">
                         Signi<span className="text-primary">geria</span>
