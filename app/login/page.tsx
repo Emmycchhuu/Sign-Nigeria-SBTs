@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { motion } from "framer-motion"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Mail, Lock, Github, Twitter, AlertTriangle } from "lucide-react"
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import FormInput from "@/components/ui/form-input"
 import Link from "next/link"
 
-export default function LoginPage() {
+function LoginForm() {
     const router = useRouter()
     const searchParams = useSearchParams()
     const { signIn, signInWithGoogle, signInWithTwitter } = useAuth()
@@ -141,5 +141,17 @@ export default function LoginPage() {
                 </div>
             </motion.div>
         </div>
+    )
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-background">
+                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+            </div>
+        }>
+            <LoginForm />
+        </Suspense>
     )
 }
