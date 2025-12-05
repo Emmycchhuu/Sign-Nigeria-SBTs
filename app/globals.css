@@ -1,0 +1,161 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Signigeria Custom Palette - Green, Yellow, Orange */
+  --background: #050505;
+  /* Deep dark background */
+  --foreground: #ffffff;
+
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #ffffff;
+
+  --popover: #1a1a1a;
+  --popover-foreground: #ffffff;
+
+  --primary: #00d084;
+  /* Green */
+  --primary-foreground: #000000;
+
+  --secondary: #ffcc00;
+  /* Yellow */
+  --secondary-foreground: #000000;
+
+  --accent: #ff8c00;
+  /* Orange */
+  --accent-foreground: #ffffff;
+
+  --muted: #2a2a2a;
+  --muted-foreground: #a0a0a0;
+
+  --destructive: #ff4444;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #00d084;
+
+  --radius: 1rem;
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Enhanced Glassmorphism - Optimized */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  /* Reduced from 16px */
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  will-change: transform;
+  /* Hint for GPU */
+}
+
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(12px);
+  /* Reduced from 20px */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  will-change: transform;
+  /* Hint for GPU */
+}
+
+/* Custom Gradients */
+.text-gradient {
+  background: linear-gradient(to right, #00d084, #ffcc00, #ff8c00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-gradient {
+  background: linear-gradient(90deg, #00d084 0%, #ff8c00 100%);
+  color: black;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 20px rgba(0, 208, 132, 0.4);
+}
+
+/* Glow Effects */
+.glow-bg {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(0, 208, 132, 0.15) 0%, rgba(255, 140, 0, 0.1) 50%, transparent 70%);
+  filter: blur(60px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Autofill Fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px rgba(255, 255, 255, 0.05);
+}
+
+/* Animations */
+@keyframes shine {
+  0% {
+    transform: skewX(-20deg) translateX(-150%);
+  }
+
+  50% {
+    transform: skewX(-20deg) translateX(150%);
+  }
+
+  100% {
+    transform: skewX(-20deg) translateX(150%);
+  }
+}
