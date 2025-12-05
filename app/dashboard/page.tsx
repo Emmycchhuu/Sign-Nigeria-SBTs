@@ -7,9 +7,11 @@ import { useEffect, useState } from "react"
 import { supabase } from "@/lib/supabase"
 import { formatDistanceToNow } from "date-fns"
 import { useAuth } from "@/context/auth-context"
+import { useRouter } from "next/navigation"
 
 export default function DashboardPage() {
     const { user } = useAuth()
+    const router = useRouter()
     const [recentActivity, setRecentActivity] = useState<any[]>([])
 
     const [stats, setStats] = useState({
@@ -17,6 +19,12 @@ export default function DashboardPage() {
         minted: 0,
         available: 777
     })
+
+    useEffect(() => {
+        if (user?.role === 'admin') {
+            router.push('/admin')
+        }
+    }, [user, router])
 
     useEffect(() => {
         const fetchData = async () => {

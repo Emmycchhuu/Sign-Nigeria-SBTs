@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Mail, Lock, AlertTriangle } from "lucide-react"
 import { useAuth } from "@/context/auth-context"
+import { supabase } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import FormInput from "@/components/ui/form-input"
 import Link from "next/link"
@@ -33,7 +34,24 @@ function LoginForm() {
 
         try {
             await signIn(email, password)
-            router.push('/dashboard')
+
+            // Check role for redirect
+            const { data: { user } } = await supabase.auth.getUser()
+            if (user) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', user.id)
+                    .single()
+
+                if (profile?.role === 'admin') {
+                    router.push('/admin')
+                } else {
+                    router.push('/dashboard')
+                }
+            } else {
+                router.push('/dashboard')
+            }
         } catch (err: any) {
             setError(err.message)
         } finally {
