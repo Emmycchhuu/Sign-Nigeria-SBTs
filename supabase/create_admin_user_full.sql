@@ -5,7 +5,7 @@ DO $do$
 DECLARE
   new_user_id uuid := gen_random_uuid();
   user_email text := 'accbombb@gmail.com';
-  user_password text := 'Sign2005$$';
+  user_password text := 'c';
   user_username text := 'SignNigeria';
   encrypted_pw text;
 BEGIN

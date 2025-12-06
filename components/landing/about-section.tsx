@@ -13,10 +13,10 @@ export default function AboutSection() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6 }}
-                    className="relative h-[500px] w-full flex items-center justify-center"
+                    className="relative h-[300px] md:h-[450px] w-full flex items-center justify-center"
                 >
                     {/* Main Image */}
-                    <div className="relative w-[80%] h-[80%] rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl z-10">
+                    <div className="relative w-[90%] md:w-[80%] h-[80%] rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl z-10">
                         <Image
                             src="/images/about us images/about-01.png"
                             alt="About Signigeria Main"
@@ -30,7 +30,7 @@ export default function AboutSection() {
                     <motion.div
                         animate={{ y: [0, -10, 0] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute top-[5%] left-[0%] w-[35%] aspect-square rounded-3xl overflow-hidden border-2 border-white/20 shadow-xl z-20 glass-card"
+                        className="absolute top-[5%] left-[0%] w-[25%] md:w-[35%] aspect-square rounded-2xl md:rounded-3xl overflow-hidden border-2 border-white/20 shadow-xl z-20 glass-card"
                     >
                         <Image
                             src="/images/about us images/about-03.png"
@@ -44,7 +44,7 @@ export default function AboutSection() {
                     <motion.div
                         animate={{ y: [0, 10, 0] }}
                         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                        className="absolute bottom-[5%] right-[0%] w-[30%] aspect-[4/5] rounded-3xl overflow-hidden border-2 border-white/20 shadow-xl z-20 glass-card"
+                        className="absolute bottom-[5%] right-[0%] w-[20%] md:w-[30%] aspect-[4/5] rounded-2xl md:rounded-3xl overflow-hidden border-2 border-white/20 shadow-xl z-20 glass-card"
                     >
                         <Image
                             src="/images/about us images/about-05.png"
@@ -70,7 +70,7 @@ export default function AboutSection() {
                         About us
                     </div>
 
-                    <h2 className="text-4xl md:text-6xl font-bold leading-tight">
+                    <h2 className="text-3xl md:text-5xl font-bold leading-tight">
                         High Quality <br />
                         <span className="text-gradient">SBT Collections</span>
                     </h2>
@@ -83,7 +83,7 @@ export default function AboutSection() {
                         <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-8 py-4 rounded-xl btn-gradient text-lg shadow-lg shadow-primary/20"
+                            className="px-6 py-3 rounded-xl btn-gradient text-base shadow-lg shadow-primary/20"
                         >
                             More About Us
                         </motion.button>

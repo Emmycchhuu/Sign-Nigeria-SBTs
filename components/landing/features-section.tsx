@@ -32,7 +32,7 @@ export default function FeaturesSection() {
     ]
 
     return (
-        <section className="py-20 relative overflow-hidden">
+        <section className="py-12 md:py-16 relative overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[100px] rounded-full -z-10" />
 
@@ -47,7 +47,7 @@ export default function FeaturesSection() {
                     <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-sm font-medium mb-4">
                         Our Speciality
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-4">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4">
                         Complete Solutions <br />
                         for your <span className="text-gradient">SBT</span>
                     </h2>
@@ -65,8 +65,8 @@ export default function FeaturesSection() {
                             whileHover={{ y: -10 }}
                             className="glass-card p-8 rounded-3xl text-center group hover:border-primary/30 transition-all duration-300"
                         >
-                            <div className={`w-20 h-20 mx-auto rounded-full bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                                <feature.icon className="w-10 h-10 text-white" />
+                            <div className={`w-16 h-16 mx-auto rounded-full bg-gradient-to-br ${feature.color} flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                                <feature.icon className="w-8 h-8 text-white" />
                             </div>
                             <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
                             <p className="text-sm text-gray-400 leading-relaxed">

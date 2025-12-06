@@ -49,6 +49,9 @@ export default function RequestsPage() {
 
     // Success Modal State
     const [showSuccessModal, setShowSuccessModal] = useState(false)
+    // Reject Modal State
+    const [showRejectModal, setShowRejectModal] = useState(false)
+    const [selectedRequest, setSelectedRequest] = useState<any>(null)
 
     const handleVerify = async (req: any) => {
         try {
@@ -64,50 +67,45 @@ export default function RequestsPage() {
                 throw new Error("Update failed. You may not have Admin permissions or the request no longer exists.")
             }
 
-            // 2. Create Notification
-            await supabase.from('notifications').insert({
-                user_id: req.user_id,
-                title: "Payment Verified",
-                message: `Your payment has been verified! The Admin will now assign your Artifact.`,
-                read: false
-            })
+            // 2. Notification is handled by DB Trigger on 'mint_requests' update
 
             // Optimistic update
             setRequests(prev => prev.filter(r => r.id !== req.id))
             setShowSuccessModal(true)
 
         } catch (error: any) {
-            console.error("Verification Error:", error)
-            alert("Error verifying payment: " + error.message)
+            console.error("Verification Error Detailed:", error)
+            alert("Error verifying payment: " + (error?.message || JSON.stringify(error)))
         }
     }
 
-    const handleReject = async (req: any) => {
-        if (!confirm("Are you sure you want to reject this request?")) return
+    const handleReject = (req: any) => {
+        setSelectedRequest(req)
+        setShowRejectModal(true)
+    }
+
+    const confirmReject = async () => {
+        if (!selectedRequest) return
 
         try {
             // 1. Update Request Status
             const { error: reqError } = await supabase
                 .from('mint_requests')
                 .update({ status: 'rejected' })
-                .eq('id', req.id)
+                .eq('id', selectedRequest.id)
 
             if (reqError) throw reqError
 
-            // 2. Create Notification
-            await supabase.from('notifications').insert({
-                user_id: req.user_id,
-                title: "Mint Request Rejected",
-                message: `Your request was rejected. Please check your proof of payment and try again.`,
-                read: false
-            })
+            // 2. Notification is handled by DB Trigger
 
             // Optimistic update
-            setRequests(prev => prev.filter(r => r.id !== req.id))
+            setRequests(prev => prev.filter(r => r.id !== selectedRequest.id))
+            setShowRejectModal(false)
+            setSelectedRequest(null)
 
         } catch (error: any) {
-            console.error("Rejection Error:", error)
-            alert("Error rejecting request: " + error.message)
+            console.error("Rejection Error Detailed:", error)
+            alert("Error rejecting request: " + (error?.message || JSON.stringify(error)))
         }
     }
 
@@ -225,6 +223,46 @@ export default function RequestsPage() {
                         >
                             Go to Collection <ArrowRight size={20} className="ml-2" />
                         </Button>
+                    </div>
+                </div>
+            )}
+
+            {/* Reject Modal */}
+            {showRejectModal && selectedRequest && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+                    <div className="bg-[#111] border border-white/10 rounded-2xl p-6 max-w-md w-full space-y-6 animate-in fade-in zoom-in duration-300">
+                        <div className="flex items-center gap-3 text-red-500">
+                            <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20">
+                                <X size={24} />
+                            </div>
+                            <h2 className="text-xl font-bold">Reject Request</h2>
+                        </div>
+
+                        <div className="space-y-2">
+                            <p className="text-gray-400">
+                                Are you sure you want to reject the request from <span className="text-white font-bold">{selectedRequest.profiles?.full_name || selectedRequest.profiles?.email}</span>?
+                            </p>
+                            <p className="text-sm text-gray-500">
+                                The user will be notified to check their payment proof.
+                            </p>
+                        </div>
+
+                        <div className="flex gap-3">
+                            <Button
+                                variant="outline"
+                                onClick={() => setShowRejectModal(false)}
+                                className="flex-1"
+                            >
+                                Cancel
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={confirmReject}
+                                className="flex-1 bg-red-500/10 text-red-500 hover:bg-red-500/20 hover:text-red-400 border border-red-500/20"
+                            >
+                                Confirm Reject
+                            </Button>
+                        </div>
                     </div>
                 </div>
             )}

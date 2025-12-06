@@ -1,8 +1,11 @@
 "use client"
 
 import { User, Shield, Bell, LogOut } from "lucide-react"
+import { useAuth } from "@/context/auth-context"
 
 export default function SettingsPage() {
+    const { user, signOut } = useAuth()
+
     return (
         <div className="max-w-2xl mx-auto space-y-8">
             <h1 className="text-3xl font-bold text-white">Settings</h1>
@@ -17,18 +20,25 @@ export default function SettingsPage() {
                         <label className="text-sm text-gray-400">Display Name</label>
                         <input
                             type="text"
-                            defaultValue="Sign Believer"
-                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary/50 transition"
+                            value={user?.user_metadata?.full_name || "Sign Believer"}
+                            readOnly
+                            disabled
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-gray-400 outline-none cursor-not-allowed"
                         />
                     </div>
                     <div className="grid gap-2">
                         <label className="text-sm text-gray-400">Email</label>
                         <input
                             type="email"
-                            defaultValue="believer@signigeria.com"
-                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-primary/50 transition"
+                            value={user?.email || "believer@signigeria.com"}
+                            readOnly
+                            disabled
+                            className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-gray-400 outline-none cursor-not-allowed"
                         />
                     </div>
+                    <p className="text-xs text-gray-500 italic">
+                        * Profile details are managed by the administrator and cannot be changed here.
+                    </p>
                 </div>
             </div>
 
@@ -48,7 +58,10 @@ export default function SettingsPage() {
                 </div>
             </div>
 
-            <button className="w-full py-4 rounded-xl border border-red-500/20 text-red-500 hover:bg-red-500/10 transition flex items-center justify-center gap-2 font-bold">
+            <button
+                onClick={() => signOut()}
+                className="w-full py-4 rounded-xl border border-red-500/20 text-red-500 hover:bg-red-500/10 transition flex items-center justify-center gap-2 font-bold"
+            >
                 <LogOut size={18} />
                 Sign Out
             </button>

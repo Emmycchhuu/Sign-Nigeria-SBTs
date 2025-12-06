@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 export default function HeroCard() {
     return (
-        <div className="relative w-full max-w-md mx-auto aspect-[4/5]">
+        <div className="relative w-full max-w-xs md:max-w-md mx-auto aspect-[4/5] h-[350px] md:h-auto">
             {/* Main Glass Card */}
             <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -40,7 +40,7 @@ export default function HeroCard() {
                 </div>
                 <div>
                     <p className="text-xs text-gray-400">Current Mint</p>
-                    <p className="text-sm font-bold text-white">0.05 Oranges</p>
+                    <p className="text-sm font-bold text-white">2000 Oranges</p>
                 </div>
             </motion.div>
 

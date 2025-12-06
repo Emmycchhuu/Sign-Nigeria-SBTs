@@ -9,25 +9,25 @@ export default function CollectionSection() {
             title: "Yoruba Royals",
             items: "120 Items",
             image: "/images/image1.png",
-            price: "0.5 Oranges",
+            price: "2000 Oranges",
         },
         {
             title: "Igbo Masquerades",
             items: "85 Items",
             image: "/images/image2.png",
-            price: "0.45 Oranges",
+            price: "2000 Oranges",
         },
         {
             title: "Hausa Architecture",
             items: "200 Items",
             image: "/images/image3.png",
-            price: "0.3 Oranges",
+            price: "2000 Oranges",
         },
         {
             title: "Benin Bronzes",
             items: "50 Items",
             image: "/images/image4.png",
-            price: "1.2 Oranges",
+            price: "2000 Oranges",
         },
     ]
 
@@ -38,23 +38,23 @@ export default function CollectionSection() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
+                    className="flex flex-col items-center text-center mb-12 gap-6"
                 >
                     <div>
                         <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-sm font-medium mb-4">
                             Top Collections
                         </div>
-                        <h2 className="text-4xl md:text-6xl font-bold">
+                        <h2 className="text-3xl md:text-5xl font-bold">
                             Popular <span className="text-gradient">Collections</span>
                         </h2>
                     </div>
 
-                    <button className="px-6 py-3 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium">
+                    <button className="px-5 py-2.5 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-sm font-medium">
                         View All Collections
                     </button>
                 </motion.div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
                     {collections.map((item, index) => (
                         <motion.div
                             key={index}

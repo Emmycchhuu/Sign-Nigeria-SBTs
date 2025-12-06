@@ -1,12 +1,12 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Bell, Megaphone, Check } from "lucide-react"
+import { Bell, Search, Megaphone, Check, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { supabase } from "@/lib/supabase"
 import { formatDistanceToNow } from "date-fns"
 
-export default function MessagesPage() {
+export default function AdminMessagesPage() {
     const [notifications, setNotifications] = useState<any[]>([])
     const [publicActivity, setPublicActivity] = useState<any[]>([])
     const [activeTab, setActiveTab] = useState<'personal' | 'broadcast'>('personal')
@@ -18,7 +18,7 @@ export default function MessagesPage() {
 
         // Realtime Subscription
         const channel = supabase
-            .channel('user_messages')
+            .channel('admin_messages')
             .on('postgres_changes', { event: '*', schema: 'public', table: 'notifications' }, () => fetchNotifications())
             .on('postgres_changes', { event: '*', schema: 'public', table: 'public_activity' }, () => fetchPublicActivity())
             .subscribe()
@@ -66,23 +66,25 @@ export default function MessagesPage() {
     }
 
     return (
-        <div className="space-y-6 max-w-4xl">
-            <h1 className="text-3xl font-bold">Messages</h1>
-
-            <div className="flex gap-2">
-                <Button
-                    variant='default'
-                    className='bg-primary text-black'
-                >
-                    <Bell size={16} className="mr-2" /> Notifications
-                </Button>
+        <div className="space-y-6 max-w-5xl">
+            <div className="flex justify-between items-center">
+                <h1 className="text-3xl font-bold">Message Center</h1>
+                <div className="flex gap-2">
+                    <Button
+                        variant={activeTab === 'personal' ? 'default' : 'outline'}
+                        onClick={() => setActiveTab('personal')}
+                        className={activeTab === 'personal' ? 'bg-primary text-black' : ''}
+                    >
+                        <Bell size={16} className="mr-2" /> Notifications
+                    </Button>
+                </div>
             </div>
 
             {activeTab === 'personal' && (
-                <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden glass-panel">
+                <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
                     <div className="p-4 border-b border-white/10 flex justify-between items-center bg-white/5">
                         <h2 className="font-bold flex items-center gap-2">
-                            <Bell size={16} className="text-primary" /> My Inbox
+                            <Bell size={16} className="text-primary" /> My Notifications
                         </h2>
                         <Button size="sm" variant="ghost" onClick={markAllRead} className="text-xs text-gray-400 hover:text-white">
                             <Check size={14} className="mr-1" /> Mark all read
@@ -94,7 +96,7 @@ export default function MessagesPage() {
                         ) : notifications.length === 0 ? (
                             <div className="p-12 text-center text-gray-500 flex flex-col items-center gap-3">
                                 <Bell size={40} className="opacity-20" />
-                                <p>No new messages</p>
+                                <p>No new notifications</p>
                             </div>
                         ) : (
                             notifications.map((notif) => (

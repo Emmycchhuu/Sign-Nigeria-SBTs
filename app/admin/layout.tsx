@@ -7,6 +7,8 @@ import { LayoutDashboard, Users, FileText, Settings, LogOut, Loader2, Box } from
 import { useAuth } from "@/context/auth-context"
 import { supabase } from "@/lib/supabase"
 import BackgroundEffects from "@/components/ui/background-effects"
+import AdminSidebar from "@/components/admin/admin-sidebar"
+import MobileAdminSidebar from "@/components/admin/mobile-admin-sidebar"
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
     const router = useRouter()
@@ -57,47 +59,21 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <BackgroundEffects />
             <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background pointer-events-none" />
 
-            {/* Sidebar */}
-            <aside className="w-64 border-r border-white/10 bg-[#050505] flex flex-col fixed h-full z-20 backdrop-blur-xl">
-                <div className="p-6 border-b border-white/10">
-                    <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
-                        Admin
-                    </h1>
-                </div>
-
-                <nav className="flex-1 p-4 space-y-2">
-                    {navItems.map((item) => {
-                        const Icon = item.icon
-                        const isActive = pathname === item.href
-                        return (
-                            <Link
-                                key={item.href}
-                                href={item.href}
-                                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${isActive
-                                    ? "bg-primary/10 text-primary border border-primary/20"
-                                    : "text-gray-400 hover:bg-white/5 hover:text-white"
-                                    }`}
-                            >
-                                <Icon size={20} />
-                                <span className="font-medium">{item.name}</span>
-                            </Link>
-                        )
-                    })}
-                </nav>
-
-                <div className="p-4 border-t border-white/10">
-                    <button
-                        onClick={handleLogout}
-                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-red-400 hover:bg-red-500/10 w-full transition-all"
-                    >
-                        <LogOut size={20} />
-                        <span className="font-medium">Logout</span>
-                    </button>
+            {/* Desktop Sidebar */}
+            <aside className="hidden md:flex w-64 h-full flex-col fixed inset-y-0 z-50">
+                <div className="h-full border-r border-white/10 bg-[#050505] backdrop-blur-xl">
+                    <AdminSidebar />
                 </div>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 ml-64 p-8">
+            <main className="flex-1 md:ml-64 p-4 md:p-8">
+                <div className="md:hidden flex items-center mb-6">
+                    <MobileAdminSidebar />
+                    <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+                        Admin Dashboard
+                    </h1>
+                </div>
                 {children}
             </main>
         </div>

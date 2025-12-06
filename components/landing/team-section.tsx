@@ -56,7 +56,7 @@ export default function TeamSection() {
                     <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-primary text-sm font-medium mb-4">
                         Team Members
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-bold">
+                    <h2 className="text-3xl md:text-5xl font-bold">
                         Our Amazing <span className="text-gradient">Team</span> <br />
                         Members
                     </h2>

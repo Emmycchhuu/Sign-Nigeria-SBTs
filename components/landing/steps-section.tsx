@@ -37,7 +37,7 @@ export default function StepsSection() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-5xl md:text-7xl font-bold leading-[1.1] mb-6">
+                        <h2 className="text-4xl md:text-5xl font-bold leading-[1.1] mb-6">
                             Join <span className="text-gradient">Signigeria</span> <br />
                             Portfolio Now
                         </h2>
@@ -57,10 +57,10 @@ export default function StepsSection() {
                                 className="flex gap-6 items-center group"
                             >
                                 {/* Icon Container */}
-                                <div className="relative w-16 h-16 flex-shrink-0">
+                                <div className="relative w-12 h-12 flex-shrink-0">
                                     <div className={`absolute inset-0 bg-gradient-to-br ${step.gradient} opacity-20 blur-xl rounded-full group-hover:opacity-40 transition-opacity`} />
                                     <div className="relative w-full h-full glass-card rounded-2xl border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                        <step.icon className="w-8 h-8 text-white" />
+                                        <step.icon className="w-6 h-6 text-white" />
                                     </div>
                                 </div>
 
@@ -84,14 +84,14 @@ export default function StepsSection() {
                     whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
-                    className="relative h-[600px] w-full flex items-center justify-center"
+                    className="relative h-[300px] md:h-[500px] w-full flex items-center justify-center"
                 >
                     {/* Main Image Container */}
                     <div className="relative w-full h-full max-w-md mx-auto">
                         <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 blur-[100px] rounded-full" />
 
-                        <div className="relative w-full h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl glass-card p-2">
-                            <div className="w-full h-full rounded-[2.5rem] overflow-hidden relative">
+                        <div className="relative w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl glass-card p-2">
+                            <div className="w-full h-full rounded-[1.8rem] md:rounded-[2.5rem] overflow-hidden relative">
                                 <Image
                                     src="/images/steps image.png"
                                     alt="Signigeria Steps"

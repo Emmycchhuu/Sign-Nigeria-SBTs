@@ -23,7 +23,7 @@ export default function LandingPage() {
 
       <main className="relative z-10">
         {/* Hero Section */}
-        <div className="max-w-7xl mx-auto px-6 pt-10 md:pt-20 pb-20">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 pt-10 md:pt-20 pb-12 md:pb-20">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Column - Text Content */}
             <motion.div
@@ -32,7 +32,7 @@ export default function LandingPage() {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
-              <h1 className="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+              <h1 className="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight">
                 Collect Next <br />
                 Generation <span className="text-gradient">SBTs</span> <br />
                 Today
@@ -57,7 +57,7 @@ export default function LandingPage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-xl btn-gradient text-lg shadow-lg shadow-primary/20"
+                  className="px-6 py-3 rounded-xl btn-gradient text-base shadow-lg shadow-primary/20"
                 >
                   Get Connected
                 </motion.button>
@@ -94,12 +94,12 @@ export default function LandingPage() {
         <section className="py-20 text-center relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
           <div className="max-w-4xl mx-auto px-6 relative z-10">
-            <h2 className="text-5xl font-bold mb-8">Ready to start your journey?</h2>
+            <h2 className="text-4xl font-bold mb-8">Ready to start your journey?</h2>
             <Link href="/signup">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-12 py-5 rounded-full btn-gradient text-xl shadow-xl shadow-primary/30"
+                className="px-10 py-4 rounded-full btn-gradient text-lg shadow-xl shadow-primary/30"
               >
                 Join Signigeria Now
               </motion.button>

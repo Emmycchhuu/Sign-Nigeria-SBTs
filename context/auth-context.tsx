@@ -12,6 +12,7 @@ export interface User {
   avatar_url?: string
   role?: string
   sbt?: any
+  user_metadata?: any
 }
 
 interface AuthContextType {

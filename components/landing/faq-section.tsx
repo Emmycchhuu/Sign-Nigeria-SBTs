@@ -46,7 +46,7 @@ export default function FAQSection() {
                     <div className="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-secondary text-sm font-medium mb-4">
                         FAQs
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-bold mb-4">
+                    <h2 className="text-3xl md:text-5xl font-bold mb-4">
                         Frequently <br />
                         Asked <span className="text-gradient">Questions</span>
                     </h2>

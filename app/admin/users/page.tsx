@@ -39,7 +39,8 @@ export default function UsersPage() {
                 </div>
             </div>
 
-            <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
+            {/* Desktop Table View */}
+            <div className="hidden md:block bg-[#111] border border-white/10 rounded-xl overflow-hidden">
                 <table className="w-full text-left text-sm">
                     <thead className="bg-white/5 text-gray-400 font-medium">
                         <tr>
@@ -103,6 +104,64 @@ export default function UsersPage() {
                         )}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4">
+                {loading ? (
+                    <div className="p-8 text-center text-gray-500 bg-[#111] border border-white/10 rounded-xl">
+                        Loading users...
+                    </div>
+                ) : users.length === 0 ? (
+                    <div className="p-8 text-center text-gray-500 bg-[#111] border border-white/10 rounded-xl">
+                        No users found
+                    </div>
+                ) : (
+                    users.map((user) => (
+                        <div key={user.id} className="bg-[#111] border border-white/10 rounded-xl p-4 space-y-4">
+                            {/* Header: Avatar, Name, Role */}
+                            <div className="flex justify-between items-start">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">
+                                        {user.avatar_url ? (
+                                            <img src={user.avatar_url} alt="User" className="w-full h-full object-cover" />
+                                        ) : (
+                                            <User size={16} />
+                                        )}
+                                    </div>
+                                    <div>
+                                        <p className="font-bold text-white text-sm">{user.full_name || user.email}</p>
+                                        <p className="text-xs text-gray-500">{user.email}</p>
+                                    </div>
+                                </div>
+                                <span className={`px-2 py-1 rounded text-xs font-medium ${user.role === 'admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-gray-500/20 text-gray-400'
+                                    }`}>
+                                    {user.role || 'user'}
+                                </span>
+                            </div>
+
+                            {/* Details Grid */}
+                            <div className="grid grid-cols-2 gap-4 pt-2 border-t border-white/5">
+                                <div>
+                                    <p className="text-xs text-gray-500 mb-1">Joined</p>
+                                    <p className="text-sm text-white">{new Date(user.created_at).toLocaleDateString()}</p>
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500 mb-1">IP Address</p>
+                                    <p className="text-sm text-gray-400 font-mono">{user.ip_address || 'Unknown'}</p>
+                                </div>
+                                <div className="col-span-2">
+                                    <p className="text-xs text-gray-500 mb-1">SBT Owned</p>
+                                    <p className="text-sm font-mono text-primary">
+                                        {user.sbts && user.sbts.length > 0
+                                            ? user.sbts[0].name
+                                            : "None"}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                )}
             </div>
         </div>
     )
